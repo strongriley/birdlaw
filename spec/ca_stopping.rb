@@ -35,14 +35,14 @@ law 'special stops required' do
   # define(:stop).as { |obj| speed.of(obj) == 0 }
 
 
-  if driver.has(vehicle) and vehicle.is(:approaching, intersection)
+  if intersection.has(stop_sign) and driver.has(vehicle) and vehicle.is.approaching(intersection)
     driver.shall { vehicle.speed == 0 }
     if intersection.has(:limit_line)
-      driver.shall { vehicle.position == limit_line }
+      driver.shall { vehicle.position.is(limit_line) }
     elsif intersection.has(:crosswalk)
-      driver.shall { vehicle.position == crosswalk }
+      driver.shall { vehicle.position.is(crosswalk) }
     else
-      driver.shall { vehicle.position == intersection.entrance }
+      driver.shall { vehicle.positionis.(intersection.entrance) }
     end
   end
 end
